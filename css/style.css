@@ -1,3 +1,65 @@
 .food-photo {
-    margin: 1em 0;
+    margin-bottom: 1em;
+}
+
+.image-cropper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.image-cropper:hover {
+    border: 1px solid #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}
+
+img {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+}
+
+/*.food-photo {*/
+    /*margin-bottom: 1em;*/
+/*}*/
+
+/*#select-container select {*/
+    /*margin-bottom: 1em;*/
+/*}*/
+
+/*.image-cropper {*/
+    /*!*margin: 1em;*!*/
+    /*width: 100%;*/
+    /*!*height: 100px;*!*/
+    /*position: relative;*/
+    /*overflow: hidden;*/
+    /*-webkit-border-radius: 50%;*/
+    /*-moz-border-radius: 50%;*/
+    /*-ms-border-radius: 50%;*/
+    /*-o-border-radius: 50%;*/
+    /*border-radius: 50%;*/
+/*}*/
+
+/*img {*/
+    /*display: inline;*/
+    /*margin: 0 auto;*/
+    /*height: 100%;*/
+    /*width: auto;*/
+/*}*/
+
+.thumbnail-container {
+    display: inline-block;
+    margin-top: 20px;
+    margin-right: 10px;
+    max-width: 9%;
+    vertical-align: top;
 }

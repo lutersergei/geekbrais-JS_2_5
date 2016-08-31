@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Редактор кулинарного блюда</title>
 
     <!-- Bootstrap -->
     <link href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -49,23 +49,21 @@
                 </div>
             </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col-sm-4">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" id="visibility"> Видимость
+                                <input type="checkbox" id="visibility"> <strong>Видимость</strong>
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="time">Время</label>
-                            <input type="text" class="form-control" id="time" placeholder="Время">
-                        </div>
+
                     </div>
                 </div>
                 <div class="row">
@@ -78,23 +76,48 @@
                 </div>
             </div>
             <div class="col-sm-8">
-                Теги
+                <div class="form-group">
+                    <label for="tags">Теги</label>
+                    <select multiple id="tags" class="form-control">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" id="palette">
+                <h3>Ингридиенты - палитра</h3>
+                <!--<div class="thumbnail-container">-->
+                    <!--<div class=" image-cropper">-->
+                        <!--<a class="" href=""><img src="/assets/ingridients/1.jpg" class="thumb" alt="сыр"></a>-->
+                    <!--</div>-->
+                    <!--<p class="text-center">dfdfdf</p>-->
+                <!--</div>-->
+                <!--<div class="thumbnail-container">-->
+                    <!--<div class=" image-cropper">-->
+                        <!--<a class="" href=""><img src="/assets/ingridients/6.jpg" class="thumb" alt="сыр"></a>-->
+                    <!--</div>-->
+                    <!--<p>Csh</p>-->
+                <!--</div>-->
+                <!--<div class="thumbnail-container">-->
+                    <!--<div class=" image-cropper">-->
+                        <!--<a class="" href=""><img src="http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg" class="thumb" alt="сыр"></a>-->
+                    <!--</div>-->
+                    <!--<p>Csh</p>-->
+                <!--</div>-->
+
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                Ингридиенты - палитра
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                Ингридиенты блюда
+                <h3>Ингридиенты блюда</h3>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
                 <button id="save-btn" type="button" class="btn btn-success">Сохранить</button>
                 <button id="cancel-btn" type="button" class="btn btn-default">Отмена</button>
+            </div>
+            <div id="json">
             </div>
         </div>
     </div>
