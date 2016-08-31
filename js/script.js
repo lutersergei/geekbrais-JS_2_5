@@ -1,20 +1,39 @@
 $(window).ready(function () {
 
-    var btn_save = $("#save-btn");
+    var btn_save = $("#save-btn");;
+    var selects;
+    var checkbox;
+    var photo;
+    var cook_categories = {};
 
     btn_save.click(function () {
-        var selects = $("#select-container select");
-        console.log(selects.last().val());
-        console.log(selects.last().prev().val());
-        console.log(counterfield.currentValue);
+        selects = $("#select-container select");
+        checkbox = $("#visibility");
+        photo = $("#photo-url");
+        console.log('checked?', checkbox.is(":checked"));
+        console.log("Посл селект",selects.last().val());
+        console.log("Атец селекта",selects.last().prev().val());
+        console.log('сложность', counterfield.currentValue);
+        console.log("FOTO",photo.val());
     });
+
+    var aja = $.ajax({
+        url: "/assets/json/category.json",
+        type: "POST",
+        dataType: "json",
+        success: function (data) {
+            cook_categories.categories = data.category;
+            $('[for="category"]').after(make_select_from_categories(get_categories(null)));
+        }
+    });
+
+
 
     function get_categories(parent)
     {
         var result = [];
-        $.each(cook_categories, function(i, item)
+        $.each(cook_categories.categories, function(i, item)
         {
-
             if (parent === null)
             {
                 if (item.parent_id === parent)
@@ -66,8 +85,6 @@ $(window).ready(function () {
             return select;
         }
     }
-
-    $('[for="category"]').after(make_select_from_categories(get_categories(null)));
 
     $("#photo-url").change(
         function(event)

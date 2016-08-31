@@ -1,0 +1,39 @@
+{
+  "category": [
+    {
+      "id": 1,
+      "parent_id": null,
+      "title": "Грузинская кухня"
+    },
+    {
+      "id": 2,
+      "parent_id": null,
+      "title": "Японская кухня"
+    },
+    {
+      "id": 3,
+      "parent_id": 1,
+      "title": "Шашлык"
+    },
+    {
+      "id": 4,
+      "parent_id": 1,
+      "title": "Люля кебаб"
+    },
+    {
+      "id": 5,
+      "parent_id": 2,
+      "title": "Суши"
+    },
+    {
+      "id": 6,
+      "parent_id": 2,
+      "title": "Роллы"
+    },
+    {
+      "id": 7,
+      "parent_id": 2,
+      "title": "Японские супы"
+    }
+  ]
+}
