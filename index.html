@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container">
+    <h1>Редактор кулинарного блюда</h1>
+    <div class="container-fluid" id="app-container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="photo-url">Фото</label>
+                    <img class="food-photo img-responsive" src="http://placehold.it/350x150"/>
+                    <input type="text" class="form-control" id="photo-url" placeholder="URL">
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="title">Название</label>
+                            <input type="text" class="form-control" id="title" placeholder="Название">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="select-container" class="form-group">
+                            <label for="category">Категория</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Видимость
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="time">Время</label>
+                            <input type="text" class="form-control" id="time" placeholder="Время">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="difficulty">Сложность</label>
+                            <div class="input-group" id="counterfield_difficulty"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                Теги
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                Ингридиенты - палитра
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                Ингридиенты блюда
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <button id="save-btn" type="button" class="btn btn-success">Сохранить</button>
+                <button id="cancel-btn" type="button" class="btn btn-default">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/counterfield.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
