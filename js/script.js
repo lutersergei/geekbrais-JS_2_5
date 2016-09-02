@@ -8,6 +8,9 @@ $(window).ready(function () {
     var photo;
     var title;
     var select_multiple;
+
+    var all_ingredients = [];
+    var dish_ingredients = [];
     var cook_categories = {};
     var dish = {}; //блюдо
 
@@ -36,13 +39,23 @@ $(window).ready(function () {
         photo = $("#photo-url");
         title = $("#title");
 
+        $(".ingredient-amount").each(function (i, item) {
+
+            var ingredient = {};
+            ingredient.id = $(item).data("id");
+            ingredient.title = $(item).data("title");
+            ingredient.amount = $(item).val();
+            dish_ingredients[i] = ingredient;
+        });
+
         dish.photo = photo.val();
         dish.title = title.val();
-        dish.category = (selects.last().val() > 0) ? selects.last().val() : selects.last().prev().val();
+        dish.category = (selects.last().val() > 0) ? selects.last().val() : selects.last().prev().val(); //Если категория последнего select - "Без категорий", берем из предпоследнего select
         dish.visibility = checkbox.is(":checked");
         dish.difficulty = counterfield.currentValue;
         dish.tags = select_multiple.val();
-
+        dish.ingredients = dish_ingredients;
+        console.log(counterfield.currentValue);
         var dish_json = JSON.stringify(dish);
 
         $("#json").empty();
@@ -59,8 +72,6 @@ $(window).ready(function () {
     );
 
 
-    var ingridients = [];
-
     function get_ingridients(i) {
         i++;
         $.ajax({
@@ -70,12 +81,11 @@ $(window).ready(function () {
             success: function (data) {
                 var ingridient = {};
                 ingridient.id = i;
-                ingridient.description = data;
-                ingridients[ingridients.length] = ingridient;
+                ingridient.title = data;
+                all_ingredients[all_ingredients.length] = ingridient;
                 get_ingridients(i)
             },
             error: function () {
-                console.log(ingridients);
                 createPalette();
             }
         });
@@ -87,21 +97,58 @@ $(window).ready(function () {
         //TODO проверка на пустой массив
 
         var palette_container = $("#palette");
-        $.each(ingridients, function (i, item) {
+        $.each(all_ingredients, function (i, item) {
             palette_container.append(
                 $("<div/>", {class: "thumbnail-container"}).append(
                     $("<div/>", {class: "image-cropper"}).append(
-                        $("<a/>", {class: ""}).append(
-                            $("<img/>", {src: "/assets/ingridients/" + item.id + ".jpg", alt: item.description})
+                        $("<a/>", {class: "link", "data-id": item.id, "data-title": item.title}).click(function () {
+                            createDishIngredient.call(this)
+                        }).append(
+                            $("<img/>", {src: "/assets/ingridients/" + item.id + ".jpg", alt: item.title})
                         )
                     )
                 ).append(
-                    $("<p/>", {text: item.description, class: "text-capitalize text-center"})
+                    $("<p/>", {text: item.title, class: "text-capitalize text-center"})
                 )
-            )
-        })
+            );
+
+        });
     }
 
+    function createDishIngredient() {
+        var ingredient_id = $(this).data("id");
+        var ingredient_title = $(this).data("title");
+
+        var link = $(this);
+
+        //Hide ingredient in palette
+        $(link).parent().parent().hide(400);
+
+        var dish_ingridients_container = $("#dish-ingridients");
+
+        var ingredient_panel = $("<div/>", {class: "col-md-3 col-sm-4 col-xs-6"}).append(
+            $("<div/>", {class: "panel panel-primary"}).append(
+                $("<div/>", {class: "panel-heading text-capitalize", text: ingredient_title}).append(
+                    $("<button/>", {class: "close", type: "button", "aria-label": "close" }).click(function () {closeButton()}
+                    ).append(
+                        $("<span/>", {class: "glyphicon glyphicon-remove"})
+                    )
+                )
+            ).append(
+                $("<div/>", {class: "panel-body"}).append(
+                    $("<input>", {type: "text", placeholder: "Количество", "data-id": ingredient_id, "data-title": ingredient_title, class: "ingredient-amount form-control"})
+                )
+            )
+        );
+
+        dish_ingridients_container.append(ingredient_panel);
+
+        function closeButton() {
+            link.parent().parent().show(400);
+            ingredient_panel.remove();
+        }
+    }
+    
     function get_categories(parent)
     {
         var result = [];
