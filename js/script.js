@@ -151,7 +151,7 @@ $(window).ready(function () {
 
         var dish_ingridients_container = $("#dish-ingridients");
 
-        var ingredient_panel = $("<div/>", {class: "col-md-3 col-sm-4 col-xs-6"}).append(
+        var ingredient_panel = $("<div/>", {class: "col-md-3 col-sm-4 col-xs-12"}).append(
             $("<div/>", {class: "panel panel-primary"}).append(
                 $("<div/>", {class: "panel-heading text-capitalize", text: ingredient_title}).append(
                     $("<button/>", {class: "close", type: "button", "aria-label": "close" }).click(function () {closeButton()}
