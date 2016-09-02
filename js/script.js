@@ -1,8 +1,10 @@
 $(window).ready(function () {
 
-    var counterfield = new CounterField('#counterfield_difficulty', {incrementStep: 1, decrementStep: 1, minValue: 1, maxValue: 5, defaultValue: 1});
+    var counterfield = new CounterField('#counterfield_difficulty', {incrementStep: 1, decrementStep: 1, minValue: 1, maxValue: 5, defaultValue: 1}); //Плагин сложности
+    get_ingridients(0);     //Ajax запрос ингредиентов
 
-    var btn_save = $("#save-btn");;
+    var btn_save = $("#save-btn");
+    var btn_cancel = $("#cancel-btn");
     var selects;
     var checkbox;
     var photo;
@@ -10,10 +12,11 @@ $(window).ready(function () {
     var select_multiple;
 
     var all_ingredients = [];
-    var dish_ingredients = [];
+
     var cook_categories = {};
     var dish = {}; //блюдо
 
+    //Запрос Категорий блюд
     $.ajax({
         url: "/assets/json/category.json",
         type: "POST",
@@ -24,6 +27,7 @@ $(window).ready(function () {
         }
     });
 
+    //Запрос Тегов
     $.ajax({
         url: "/assets/json/tags.json",
         type: "POST",
@@ -34,6 +38,8 @@ $(window).ready(function () {
     });
 
     btn_save.click(function () {
+        var dish_ingredients = [];
+
         selects = $("#select-container select");
         checkbox = $("#visibility");
         photo = $("#photo-url");
@@ -55,22 +61,42 @@ $(window).ready(function () {
         dish.difficulty = counterfield.currentValue;
         dish.tags = select_multiple.val();
         dish.ingredients = dish_ingredients;
-        console.log(counterfield.currentValue);
+
         var dish_json = JSON.stringify(dish);
 
-        $("#json").empty();
-
-        $("#json").append(
+        $("#json").empty().append(
             $("<kbd/>", {text: dish_json})
-        )
+        );
+
     });
 
-    $("#photo-url").change(
-        function(event) {
-            $(".food-photo").prop("src",$(this).val());
-        }
-    );
+    btn_cancel.click(function () {
 
+        selects = $("#select-container select");
+        checkbox = $("#visibility");
+        photo = $("#photo-url");
+        title = $("#title");
+
+        photo.val("");
+        title.val("");
+        checkbox.prop('checked', false);
+        select_multiple.val("");
+        counterfield.currentValue = 1;
+
+        //Очистка селек категорий
+        selects.first().val(-1);
+        while (selects.first().next().length)
+        {
+            selects.first().next().remove();
+        }
+
+        //Оичтска ингредиентов
+        $(".close").each(function (i, item) {
+           item.click();
+        });
+
+        $("#json").empty();
+    });
 
     function get_ingridients(i) {
         i++;
@@ -79,19 +105,18 @@ $(window).ready(function () {
             type: "POST",
             dataType: "text",
             success: function (data) {
-                var ingridient = {};
-                ingridient.id = i;
-                ingridient.title = data;
-                all_ingredients[all_ingredients.length] = ingridient;
+                var ingredient = {};
+                ingredient.id = i;
+                ingredient.title = data;
+                all_ingredients[all_ingredients.length] = ingredient;
                 get_ingridients(i)
             },
             error: function () {
+                //Как только файлы на сервере закончились, начиаем обрабатывать полученные файлы. Создаем палитру блюд.
                 createPalette();
             }
         });
     }
-
-    get_ingridients(0);
 
     function createPalette() {
         //TODO проверка на пустой массив
@@ -204,4 +229,10 @@ $(window).ready(function () {
             select_multiple.append(option);
         })
     }
+
+    $("#photo-url").change(
+        function(event) {
+            $(".food-photo").prop("src",$(this).val());
+        }
+    );
 });
