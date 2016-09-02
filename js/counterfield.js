@@ -49,11 +49,12 @@ function CounterField(selector, options) {
     function increment () {
         input.value = +input.value + self.incrementStep;
         input.value = checkValue(input.value);
-        self.defaultValue = input.value;
+        self.currentValue = input.value;
     }
     function decrement () {
         input.value = +input.value - self.decrementStep;
         input.value = checkValue(input.value);
+        self.currentValue = input.value;
     }
     function checkValue(value) {
         if ((self.minValue === undefined) && (self.maxValue === undefined))
